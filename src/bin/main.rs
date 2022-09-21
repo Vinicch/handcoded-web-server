@@ -39,10 +39,8 @@ fn handle_connection(mut stream: TcpStream) {
 
     let contents = fs::read_to_string(filename).unwrap();
     let response = format!(
-        "{}\r\nContent-Length: {}\r\n\r\n{}",
-        status_line,
-        contents.len(),
-        contents
+        "{status_line}\r\nContent-Length: {}\r\n\r\n{contents}",
+        contents.len()
     );
 
     stream.write_all(response.as_bytes()).unwrap();
